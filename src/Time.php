@@ -67,4 +67,26 @@ class Time
 
         return $return;
     }
+
+    /** 两时间相差多少年月日时分秒
+     * @param string $startDate
+     * @param string $endDate
+     * @return array
+     */
+    public static function diff(string $startDate, string $endDate): array
+    {
+        $origin = date_create($startDate);
+        $target = date_create($endDate);
+
+        $interval = date_diff($origin, $target);
+
+        $character = ['y', 'm', 'd', 'h', 'i', 's'];
+
+        $result = [];
+        foreach ($character as $c) {
+            $result[] = [$c => $interval->format('%' . $c)];
+        }
+
+        return $result;
+    }
 }
