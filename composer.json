@@ -1,0 +1,23 @@
+{
+    "name": "phpdie/helper",
+    "description": "helper",
+    "type": "library",
+    "license": "Apache-2.0",
+    "autoload": {
+        "psr-4": {
+            "Helper\\": "src/"
+        },
+        "files": [
+            "src/helper.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "phpdie",
+            "email": "sundaysunsun@vip.qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1"
+    }
+}
