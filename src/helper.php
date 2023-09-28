@@ -30,7 +30,7 @@ if (!function_exists('_array_column')) {
 }
 
 if (!function_exists('_empty')) {
-    //与empty的区别是,不把0或者'0'当成是空
+    //与empty的区别是,不把0或者'0',0.0当成是空
     function _empty($val): bool
     {
         return !is_numeric($val) && empty($val);
