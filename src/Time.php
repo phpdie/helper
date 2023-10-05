@@ -89,4 +89,26 @@ class Time
 
         return $result;
     }
+
+    /** 两时间相差多少天或时或分或秒
+     * @param string $startDate
+     * @param string $endDate
+     * @param string $char
+     * @return int
+     */
+    public static function diffTime(string $startDate, string $endDate, string $char = 'd'): int
+    {
+        $origin = strtotime($startDate);
+        $target = strtotime($endDate);
+
+        $diff = $target - $origin;
+        $character = [
+            's' => 1,
+            'i' => 60,
+            'h' => 60 * 60,
+            'd' => 60 * 60 * 24
+        ];
+
+        return sprintf("%.2f", $diff / $character[$char]);
+    }
 }
