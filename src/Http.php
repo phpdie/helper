@@ -8,7 +8,7 @@ class Http
 {
     /** curl请求
      * @param string $url
-     * @param $param
+     * @param string|array $param
      * @param array $headers
      * @param string $method
      * @return bool|string
@@ -47,12 +47,7 @@ class Http
      */
     public static function get(string $url, $param, array $headers = [])
     {
-        $parse = parse_url($url);
-
-        parse_str($parse['query'] ?? '', $output);
-        $output = array_merge($output, $param);
-        $url = sprintf("%s://%s%s?%s", $parse['scheme'], $parse['host'], $parse['path'], http_build_query($param));
-
+        $url = self::http_replace_query($url, $param);
         return self::curl($url, $param, $headers);
     }
 
@@ -90,5 +85,26 @@ class Http
         }
 
         return self::curl($url, $fields, $headers, 'POST');
+    }
+
+    /** 在原来的链接上替换或追加参数
+     * @param string $url
+     * @param array $param
+     * @return string
+     */
+    public static function http_replace_query(string $url, array $param): string
+    {
+        $parse = parse_url($url);
+
+        parse_str($parse['query'] ?? '', $output);
+        $output = array_merge($output, $param);
+
+        return sprintf("%s%s%s%s%s",
+            !empty($parse['scheme']) ? $parse['scheme'] . '://' : '',
+            $parse['host'] ?? '',
+            $parse['path'] ?? '',
+            !empty($param) ? '?' . http_build_query($param) : '',
+            !empty($parse['fragment']) ? '#' . $parse['fragment'] : ''
+        );
     }
 }
