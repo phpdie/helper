@@ -4,7 +4,7 @@ namespace Helper;
 
 class Data
 {
-    public static function tree($list, $pid = 0, $id = 'id', $pid_str = 'pid', $children = 'children')
+    public static function tree($list, $pid = 0, $id_str = 'id', $pid_str = 'pid', $children_str = 'children')
     {
         $arr = [];
         if (count($list) == 0) {
@@ -12,8 +12,8 @@ class Data
         }
         foreach ($list as $item) {
             if ($item[$pid_str] == $pid) {
-                $this_children = self::tree($list, $item[$id], $id, $pid_str, $children);
-                $item[$children] = $this_children;
+                $this_children = self::tree($list, $item[$id_str], $id_str, $pid_str, $children_str);
+                $item[$children_str] = $this_children;
                 $arr[] = $item;
             }
         }
