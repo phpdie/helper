@@ -4,7 +4,7 @@ namespace Helper;
 
 class Data
 {
-    public static function tree($list, $pid = 0, $id_str = 'id', $pid_str = 'pid', $children_str = 'children')
+    public static function tree($list, $pid = 0, $id_str = 'id', $pid_str = 'pid', $children_str = 'children'): array
     {
         $arr = [];
         if (count($list) == 0) {
