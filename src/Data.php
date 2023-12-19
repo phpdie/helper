@@ -4,6 +4,14 @@ namespace Helper;
 
 class Data
 {
+    /** 生成树形结构列表
+     * @param $list
+     * @param $pid
+     * @param $id_str
+     * @param $pid_str
+     * @param $children_str
+     * @return array
+     */
     public static function tree($list, $pid = 0, $id_str = 'id', $pid_str = 'pid', $children_str = 'children')
     {
         $arr = [];
@@ -16,7 +24,15 @@ class Data
         return $arr;
     }
 
-    public static function parents($list, $current_id = 0, $id_str = 'id', $pid_str = 'pid', $with_current_id = false)
+    /** 获取所有父类
+     * @param $list
+     * @param $current_id 当前id
+     * @param $id_str
+     * @param $pid_str
+     * @param $with_current_id
+     * @return array
+     */
+    public static function parents($list, $current_id, $id_str = 'id', $pid_str = 'pid', $with_current_id = false)
     {
         $arr = [];
         foreach ($list as $v) {
@@ -28,6 +44,14 @@ class Data
         return $with_current_id ? array_merge([$current_id], $arr) : $arr;
     }
 
+    /** 获取所有子类
+     * @param $list
+     * @param $current_id 当前id
+     * @param $id_str
+     * @param $pid_str
+     * @param $with_current_id 是否包含当前id
+     * @return array
+     */
     public static function sons($list, $current_id = 0, $id_str = 'id', $pid_str = 'pid', $with_current_id = false)
     {
         $arr = array();
