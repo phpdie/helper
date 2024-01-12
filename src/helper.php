@@ -36,3 +36,15 @@ if (!function_exists('_empty')) {
         return !is_numeric($val) && empty($val);
     }
 }
+
+if (!function_exists('_array_filter')) {
+    //与array_filter的区别是,不把0或者'0',0.0过滤掉
+    function _array_filter($array)
+    {
+        return array_filter($array, function ($item) {
+            if (!_empty($item)) {
+                return $item;
+            }
+        });
+    }
+}
